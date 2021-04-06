@@ -46,7 +46,10 @@ namespace IntegralSolution
                 throw new Exception("Нижнее значение больше, чем верхнее!");
             }
             long n = Convert.ToInt64(tbN.Text);
-
+            if (n <= 0)
+            {
+                throw new Exception("Значение N меньше или равно 0");
+            }
             ICalculator calculator = GetCalculator();
 
             double result = 0.0;

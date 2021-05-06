@@ -52,7 +52,9 @@
     <Compile Include="ICalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RectangleCalculator.cs" />
+    <Compile Include="RectangleCalculatorParallel.cs" />
     <Compile Include="TrapCalculator.cs" />
+    <Compile Include="TrapCalculatorParallel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

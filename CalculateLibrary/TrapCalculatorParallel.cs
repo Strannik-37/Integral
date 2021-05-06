@@ -4,21 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace CalculateLibrary
 {
-    public class RectangleCalculator : ICalculator // реализация интерфейса (расчёт методом прямоугольников)
+    public class TrapCalculatorParallel : ICalculator
     {
         public double Calculate(double a, double b, long n, Func<double, double> f)
         {
+            double [] mass = new double[n];
             double h = (b - a) / n;
-            a += h * 0.5;
             double sum = 0;
-            for (int i = 0; i < n; i++)
-            {
-                sum += f(a + h * i);
-            }
-            return sum*h;
+            Parallel.For(1, n, i => mass[i] = f(a + h * i));
+            sum = mass.Sum();
+            sum += (f(a) + f(b)) / 2;
+            return sum * h;
         }
     }
 }

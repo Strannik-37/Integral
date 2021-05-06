@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IntegralSolution"
         mc:Ignorable="d"
-        Title="Вычисление интеграла гр. 3-46 Лезин А.А." MinHeight="240" MinWidth="800" Height="250">
+        Title="Вычисление интеграла гр. 3-46 Лезин А.А." MinHeight="290" MinWidth="800" Height="270">
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
@@ -32,8 +32,10 @@
         <TextBox x:Name="tbUpperBound" Grid.Row="1" Grid.Column="1" Margin="5">100</TextBox>
         <TextBlock  Grid.Row="2" Grid.Column="0" Margin="5">Число точек</TextBlock>
         <TextBox x:Name="tbN"  Grid.Row="2" Grid.Column="1" Margin="5">100000</TextBox>
-        <Button x:Name="btCalculate" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Click="btCalculate_Click">Рассчитать</Button>
-        <Button x:Name="btClean" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Click="btClean_Click">Очистить</Button>
+        <Label Grid.Row="5" Grid.Column="0">Время</Label>
+        <TextBox x:Name="tbTime"  Grid.Row="5" Grid.Column="1" Margin="5"></TextBox>
+        <Button x:Name="btCalculate" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Click="btCalculate_Click">Рассчитать</Button>
+        <Button x:Name="btClean" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Click="btClean_Click">Очистить</Button>
         <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">Результат</TextBlock>
         <TextBox x:Name ="tbResult" Grid.Row="4" 
                  Grid.Column="1" IsReadOnly="True" TextWrapping="Wrap" Background="LightCyan" Margin="5">
@@ -41,10 +43,16 @@
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="5">Метод</TextBlock>
         <ComboBox x:Name="cbmMethod" Grid.Row="3" Grid.Column="1" Margin="5">
             <ComboBoxItem IsSelected="True">
-                Метод прямоугольников
+                Метод прямоугольников (последовательно)
             </ComboBoxItem>
             <ComboBoxItem>
-                Метод трапеций
+                Метод прямоугольников (параллельно)
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Метод трапеций (последовательно)
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Метод трапеций (параллельно)
             </ComboBoxItem>
         </ComboBox>
         <oxy:Plot x:Name="graph" Title="{Binding Title}" Grid.Column="2" Grid.RowSpan="8" >

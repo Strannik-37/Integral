@@ -54,6 +54,8 @@ namespace IntegralSolution
 
             double result = 0.0;
 
+            DateTime tn = DateTime.Now;
+
             for (int i = 0; i < n; i += 1000)
             {
                 DateTime timeStart = DateTime.Now;
@@ -63,6 +65,10 @@ namespace IntegralSolution
                 DateTime timeStop = DateTime.Now;
                 time.Add(((timeStop - timeStart).TotalMilliseconds, i));
             }
+
+            DateTime tk = DateTime.Now;
+
+            tbTime.Text = Convert.ToString((tk - tn).TotalSeconds);
 
             tbResult.Text = Convert.ToString(result);
 
@@ -78,7 +84,11 @@ namespace IntegralSolution
                 case 0:
                     return new RectangleCalculator();
                 case 1:
+                    return new RectangleCalculatorParallel();
+                case 2:
                     return new TrapCalculator();
+                case 3:
+                    return new TrapCalculatorParallel();
                 default: 
                     return new RectangleCalculator();
             }

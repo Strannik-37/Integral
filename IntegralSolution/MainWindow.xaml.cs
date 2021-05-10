@@ -27,7 +27,7 @@ namespace IntegralSolution
             InitializeComponent();
         }
 
-        private void btCalculate_Click(object sender, RoutedEventArgs e) //обработчик события нажатия на кнопку
+        private void btOtrisovat_Click(object sender, RoutedEventArgs e) //обработчик события нажатия на кнопку
         {
             List<(double, int)> time = Calculate();
             DrawGraph(time);
@@ -36,11 +36,11 @@ namespace IntegralSolution
         private List<(double, int)> Calculate () // реализация обработчика
         {
             this.Cursor = Cursors.Wait;
-
             List<(double, int)> time = new List<(double, int)>();
 
             double a = Convert.ToDouble(tbLowerBound.Text);
             double b = Convert.ToDouble(tbUpperBound.Text);
+
             if (a > b)
             {
                 throw new Exception("Нижнее значение больше, чем верхнее!");
@@ -50,27 +50,16 @@ namespace IntegralSolution
             {
                 throw new Exception("Значение N меньше или равно 0");
             }
+
             ICalculator calculator = GetCalculator();
-
-            double result = 0.0;
-
-            DateTime tn = DateTime.Now;
 
             for (int i = 0; i < n; i += 1000)
             {
                 DateTime timeStart = DateTime.Now;
-
-                result = calculator.Calculate(a, b, i, x => 11 * x - Math.Log(11 * x) - 2);
-
+                calculator.Calculate(a, b, i, x => 11 * x - Math.Log(11 * x) - 2);
                 DateTime timeStop = DateTime.Now;
                 time.Add(((timeStop - timeStart).TotalMilliseconds, i));
             }
-
-            DateTime tk = DateTime.Now;
-
-            tbTime.Text = Convert.ToString((tk - tn).TotalSeconds);
-
-            tbResult.Text = Convert.ToString(result);
 
             this.Cursor = Cursors.Arrow;
 
@@ -119,6 +108,37 @@ namespace IntegralSolution
         private void btClean_Click(object sender, RoutedEventArgs e)
         {
             ClearGraph();
+        }
+
+        private void btCalculate_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Wait;
+
+            double a = Convert.ToDouble(tbLowerBound.Text);
+            double b = Convert.ToDouble(tbUpperBound.Text);
+
+            if (a > b)
+            {
+                throw new Exception("Нижнее значение больше, чем верхнее!");
+            }
+            long n = Convert.ToInt64(tbN.Text);
+            if (n <= 0)
+            {
+                throw new Exception("Значение N меньше или равно 0");
+            }
+
+            ICalculator calculator = GetCalculator();
+
+            double result = 0.0;
+
+            DateTime tn = DateTime.Now;
+            result = calculator.Calculate(a, b, n, x => 11 * x - Math.Log(11 * x) - 2);
+            DateTime tk = DateTime.Now;
+
+            tbTime.Text = Convert.ToString((tk - tn).TotalSeconds);
+            tbResult.Text = Convert.ToString(result);
+
+            this.Cursor = Cursors.Arrow;
         }
     }
 }

@@ -14,7 +14,11 @@ namespace CalculateLibrary
             double h = (b - a) / n;
             double sum = 0;
             Parallel.For(1, n, i => mass[i] = f(a + h * i));
-            sum = mass.Sum();
+            //sum = mass.Sum();
+            foreach (double value in mass)
+            {
+                sum += value;
+            }
             sum += (f(a) + f(b)) / 2;
             return sum * h;
         }
